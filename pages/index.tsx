@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import styles from "../styles/landingPage.module.css"
-import {  Img111 } from './data'
 import Head from 'next/head'
+import { Img111 } from '@/data'
 
 export default function Home() {
   return (
