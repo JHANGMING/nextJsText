@@ -5,7 +5,7 @@ import { Img111 } from '@/data'
 import InvoiceStatus from '@/components/InvoiceStatus'
 import { useRouter } from 'next/router'
 
-export default function Home({data}) {
+export default function Home() {
   const router = useRouter()
   const clickHandler = () => {
     router.push('/about/1')
@@ -22,32 +22,23 @@ export default function Home({data}) {
         <Image {...Img111} className="border rounded-full w-[200px] h-[350px]" />
         <InvoiceStatus status="paid" onClick={clickHandler} />
       </section>
-      <ul>
-        {data.map((item) => (
-          <li key={item.id}>
-            <p>
-              帳：{item.acount} 密：<span>{item.password}</span>
-            </p>
-          </li>
-        ))}
-      </ul>
     </>
   )
 }
-export const getStaticProps = async () => {
-  try {
-    const res = await fetch(`${process.env.BASE_URL || 'https://next-js-text-orcin.vercel.app'}/api/getData`)
-    if (!res.ok) {
-      throw new Error(`Failed to fetch API, received status ${res.status}`)
-    }
-    const data = await res.json()
-    return {
-      props: { data: data.feedback },
-    }
-  } catch (error) {
-    console.error(error)
-    return {
-      props: { data: {} }, // 或者适当的错误处理/默认值
-    }
-  }
-}
+// export const getStaticProps = async () => {
+//   try {
+//     const res = await fetch(`${process.env.BASE_URL || 'https://next-js-text-orcin.vercel.app'}/api/getData`)
+//     if (!res.ok) {
+//       throw new Error(`Failed to fetch API, received status ${res.status}`)
+//     }
+//     const data = await res.json()
+//     return {
+//       props: { data: data.feedback },
+//     }
+//   } catch (error) {
+//     console.error(error)
+//     return {
+//       props: { data: {} }, // 或者适当的错误处理/默认值
+//     }
+//   }
+// }
