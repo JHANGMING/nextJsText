@@ -35,10 +35,19 @@ export default function Home({data}) {
   )
 }
 export const getStaticProps = async () => {
-  const res = await fetch(`${process.env.BASE_URL || 'https://next-js-text-orcin.vercel.app'}/api/getData`)
-  const data = await res.json()
-
-  return {
-    props: { data: data.feedback },
+  try {
+    const res = await fetch(`${process.env.BASE_URL || 'https://next-js-text-orcin.vercel.app'}/api/getData`)
+    if (!res.ok) {
+      throw new Error(`Failed to fetch API, received status ${res.status}`)
+    }
+    const data = await res.json()
+    return {
+      props: { data: data.feedback },
+    }
+  } catch (error) {
+    console.error(error)
+    return {
+      props: { data: {} }, // 或者适当的错误处理/默认值
+    }
   }
 }
