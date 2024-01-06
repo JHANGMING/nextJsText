@@ -15,12 +15,11 @@ type Params = {
 export const getStaticPaths = async () => {
   const res = await fetch('https://jsonplaceholder.typicode.com//users')
   const datas = await res.json()
-  const paths = datas
-    .map((data: DataProps) => {
-      if (data && data.id) {
-        return { params: { id: data.id.toString() } }
-      }
-    })
+  const paths = datas.map((data: DataProps) => {
+    if (data && data.id) {
+      return { params: { id: data.id.toString() } }
+    }
+  })
   return {
     paths,
     fallback: false,
@@ -36,6 +35,9 @@ export async function getStaticProps(context: GetStaticPropsContext<Params>) {
 }
 const Details = ({ data }: DataProps) => {
   const router = useRouter()
+  console.log(router.pathname)
+  console.log(router.query)
+
   return (
     <div className=" text-center">
       <h1>{data.name}</h1>

@@ -20,8 +20,21 @@ const About = ({ data }: DataProps) => {
     <>
       <h1>This is About</h1>
       <ul className="flex flex-col items-center">
-        {data.map((item) => (
+        {/* {data.map((item) => (
           <Link href={`/about/${item.id}`} key={item.id}>
+            <button type="button" className=" cursor-pointer hover:text-blue-600">
+              {item.name}
+            </button>
+          </Link>
+        ))} */}
+        {data.map((item) => (
+          <Link
+            href={{
+              pathname: '/about/[id]',
+              query: { id: item.id },
+            }}
+            key={item.id}
+          >
             <button type="button" className=" cursor-pointer hover:text-blue-600">
               {item.name}
             </button>
